@@ -1,0 +1,8 @@
+{
+  "name": "dfir-simulation",
+  "private": true,
+  "description": "DFIR-2026-001 case file. The docs/ site is static HTML; these scripts only serve it locally.",
+  "scripts": {
+    "dev": "python -m http.server 8000 --directory docs"
+  }
+}
