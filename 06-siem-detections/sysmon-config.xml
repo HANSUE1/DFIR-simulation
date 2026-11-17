@@ -1,0 +1,25 @@
+<!--
+  Sysmon configuration pointer for Case DFIR-2026-001.
+
+  This case uses the SwiftOnSecurity sysmon-config as its base (rich, well-tuned telemetry):
+    https://github.com/SwiftOnSecurity/sysmon-config  ->  sysmonconfig-export.xml
+
+  Replace the contents of this file with the exact sysmonconfig-export.xml you installed on VICTIM,
+  so the repo records the precise telemetry configuration that produced the evidence.
+
+  The critical rule group for this case is ProcessAccess (Event ID 10), which must log access to
+  lsass.exe. SwiftOnSecurity's config includes LSASS access logging by default. Confirm this block
+  is present (do not exclude lsass.exe):
+
+    <ProcessAccess onmatch="include">
+      <TargetImage condition="image">lsass.exe</TargetImage>
+    </ProcessAccess>
+
+  Install on VICTIM:
+    Sysmon64.exe -accepteula -i sysmonconfig-export.xml
+  Update after editing:
+    Sysmon64.exe -c sysmonconfig-export.xml
+-->
+<Sysmon schemaversion="4.90">
+  <!-- TBD: paste the real installed SwiftOnSecurity config here. -->
+</Sysmon>

@@ -1,0 +1,6 @@
+ioc_type,value,context,source_evidence,mitre_technique,notes
+process_name,TBD,Dumping process observed in memory,E001,T1003.001,
+file_hash_sha256,TBD,Hash of dumped/dropped binary,E001/E002,T1003.001,
+file_path,TBD,Credential dump file on disk,E002,T1003.001,
+event_id,10,Sysmon ProcessAccess to lsass.exe,E003,T1003.001,Primary detection signal
+ip_address,TBD,Any network indicator from netscan,E001,,

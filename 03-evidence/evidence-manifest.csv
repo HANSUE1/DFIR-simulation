@@ -1,0 +1,5 @@
+evidence_id,description,source_host,source_ip,acquisition_tool,format,acquired_utc,acquired_by,size_bytes,sha256,notes
+E001,Physical memory image,VICTIM,10.10.10.10,FTK Imager / DumpIt,raw (.mem),TBD,analyst,TBD,TBD,Acquire before powering off the VM
+E002,System disk image,VICTIM,10.10.10.10,FTK Imager,E01,TBD,analyst,TBD,TBD,Verify hash immediately after acquisition
+E003,Sysmon EVTX export,VICTIM,10.10.10.10,wevtutil / FTK Imager,evtx,TBD,analyst,TBD,TBD,Microsoft-Windows-Sysmon/Operational
+E004,Wazuh alerts export,SIEM,10.10.10.30,Wazuh dashboard,json,TBD,analyst,TBD,TBD,Filtered to the attack window

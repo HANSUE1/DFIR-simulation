@@ -1,0 +1,34 @@
+<!--
+  Wazuh custom rules for Case DFIR-2026-001.
+  WHY: raise a high-severity alert when Sysmon reports a process opening a handle to lsass.exe
+  with access rights used by credential-dumping tools (T1003.001).
+
+  Install: append to /var/ossec/etc/rules/local_rules.xml on the Wazuh Manager, then restart:
+    sudo systemctl restart wazuh-manager
+  Rule IDs 100000+ are the user range (do not collide with built-in rules).
+  Sysmon events arrive decoded under the windows_eventchannel ruleset; field names below match
+  Wazuh's Sysmon decoding (data.win.eventdata.*).
+-->
+<group name="sysmon,dfir_2026_001,">
+
+  <!-- Sysmon Event ID 10 = ProcessAccess. Base match on the target being LSASS. -->
+  <rule id="100010" level="12">
+    <if_group>sysmon_event_10</if_group>
+    <field name="win.eventdata.targetImage">lsass\.exe$</field>
+    <description>T1003.001: Process accessed LSASS memory (possible credential dumping)</description>
+    <mitre>
+      <id>T1003.001</id>
+    </mitre>
+  </rule>
+
+  <!-- Escalate when the access mask is one commonly used to read LSASS memory. -->
+  <rule id="100011" level="14">
+    <if_sid>100010</if_sid>
+    <field name="win.eventdata.grantedAccess">0x1010|0x1410|0x1438|0x143a|0x1fffff</field>
+    <description>T1003.001: High-risk access mask on LSASS ($(win.eventdata.grantedAccess)) from $(win.eventdata.sourceImage)</description>
+    <mitre>
+      <id>T1003.001</id>
+    </mitre>
+  </rule>
+
+</group>

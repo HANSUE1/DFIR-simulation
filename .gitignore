@@ -1,0 +1,23 @@
+# Evidence never goes into git: too large, and it may hold credentials from the victim VM.
+*.E01
+*.E0[2-9]
+*.Ex01
+*.raw
+*.mem
+*.vmem
+*.dmp
+*.aff4
+*.dd
+*.img
+*.plaso
+03-evidence/original/*
+03-evidence/working-copies/*
+!03-evidence/original/.gitkeep
+!03-evidence/working-copies/.gitkeep
+
+# Autopsy case databases
+autopsy-case/
+
+# Local tooling output
+.taste-skill/
+node_modules/
